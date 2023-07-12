@@ -1,14 +1,17 @@
 import os
 from box.exceptions import BoxValueError
 import yaml
-from textSummarizer.logging import logger
+from src.textSummarizer.logging import logger 
 from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
 
+
+
 @ensure_annotations
-def read_yml(path_to_yaml: Path) -> ConfigBox:
+def read_yaml(path_to_yaml: Path) -> ConfigBox:
+    
     """Read a YAML file and return a ConfigBox object.
     args:
     path: Path to the YAML file.
@@ -21,7 +24,7 @@ def read_yml(path_to_yaml: Path) -> ConfigBox:
     try:
         with open(path_to_yaml) as yaml_file:
             content=yaml.safe_load(yaml_file)
-            logger.info(f"Read {path_to_yaml} loaded successfully.")
+            logger.info(f"yaml file: {path_to_yaml} loaded successfully.")
             return ConfigBox(content)
     except BoxValueError as e:
         raise ValueError("yaml file is not a valid yaml file.")
@@ -43,7 +46,7 @@ def create_directories(path_to_directories: list,verbose=True):
           logger.info(f"created directory at: {path}")
 
 @ensure_annotations
-def get_size(path_to_file: Path) -> str:
+def get_size(path: Path) -> str:
     """Get the size of a file.
     args:
     path(Path): Path to the file.
